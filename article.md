@@ -1733,6 +1733,12 @@ from IPython.display import Image, display
 display(Image("./media/tatavla_analysis4.png"))
 ```
 
+```python jdh={"module": "object", "object": {"source": ["Visualization of movements Tatavla"]}} tags=["figure-tatavla-move-*"]
+from IPython.display import IFrame, display
+
+display(IFrame("./media/kepler_tatavla.html", width="100%", height=700))
+```
+
 ### Fener
 
 
