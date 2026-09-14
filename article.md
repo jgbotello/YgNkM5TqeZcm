@@ -620,12 +620,59 @@ def process_excel_batches_prompt_batching():
 
         # 2.2) Build prompt for the entire batch
         prompt = build_batch_prompt(batch_payload)
-        try:
-            batch_obj = call_openai_structured_batch(prompt)  
-            batch_result = batch_obj.get("results", [])    
-        except Exception as ex:
-            print(f"   ✗ batch {b_idx} error LLM: {ex}")
-            sleep_between_batches(SLEEP_MIN, SLEEP_MAX)
+        
+        MAX_RETRIES = 3
+        batch_result = None
+        
+        for attempt in range(1, MAX_RETRIES + 1):
+            try:
+                print(f"   API attempt {attempt}/{MAX_RETRIES}")
+        
+                batch_obj = call_openai_structured_batch(prompt)
+                candidate_result = batch_obj.get("results", [])
+        
+                # Validate that all expected defters are present
+                expected_defters = {
+                    str(item["defter"])
+                    for item in batch_payload
+                }
+        
+                returned_defters = {
+                    str(item.get("defter"))
+                    for item in candidate_result
+                }
+        
+                missing_defters = expected_defters - returned_defters
+                extra_defters = returned_defters - expected_defters
+        
+                if missing_defters or extra_defters:
+                    raise ValueError(
+                        f"Batch validation failed. "
+                        f"Missing defters: {missing_defters}; "
+                        f"Unexpected defters: {extra_defters}"
+                    )
+        
+                # If everything is valid, accept the result
+                batch_result = candidate_result
+                print(f"   ✓ Batch {b_idx} validated successfully.")
+                break
+        
+            except Exception as ex:
+                print(
+                    f"   ✗ Batch {b_idx} failed validation/API call "
+                    f"(attempt {attempt}/{MAX_RETRIES}): {ex}"
+                )
+        
+                if attempt < MAX_RETRIES:
+                    print(f"   ↻ Recomputing batch {b_idx}...")
+                    sleep_between_batches(SLEEP_MIN, SLEEP_MAX)
+        
+        # If all retries failed, skip this batch
+        if batch_result is None:
+            print(
+                f"   ✗ Batch {b_idx} skipped after "
+                f"{MAX_RETRIES} unsuccessful attempts."
+            )
             continue
 
         # 2.3) Index results by 'defter'
