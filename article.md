@@ -219,23 +219,36 @@ The two sets of defters analyzed in this study were already transliterated and d
 ```python jdh={"module": "object", "object": {"source": ["Dataset"]}} tags=["table-dataset-*"]
 import pandas as pd
 
+# Path to the Excel file containing the historical mobility datasets
 dataset_path = "./datasets/datasets.xlsx"
+
+# Worksheets corresponding to the two communities analyzed in the study
 sheets = ["tatavla", "fener"]
+
+# Column containing the recorded migration/mobility movements
 target_col = "Migration"
 
+# Store the number of valid movement records for each community
 results = []
 
+# Process each worksheet independently
 for sheet in sheets:
+    # Load the corresponding community dataset from the Excel workbook
     df = pd.read_excel(dataset_path, sheet_name=sheet)
+
+    # Retain only records for which migration/mobility information is available
     df_clean = df.dropna(subset=[target_col])
 
+    # Save the number of records containing movement information
     results.append({
         "Sheet": sheet.capitalize(),
         "Rows with Movements": len(df_clean)
     })
 
+# Convert the collected counts into a summary table for comparison
 df_summary = pd.DataFrame(results)
 
+# Display the summary table
 df_summary
 ```
 
