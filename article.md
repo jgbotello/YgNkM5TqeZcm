@@ -1730,13 +1730,7 @@ if "location_2" in movement_cols:
 ```python jdh={"module": "object", "object": {"source": ["Visualization of movements Tatavla"]}} tags=["figure-tatavla-move-*"]
 from IPython.display import Image, display
 
-display(Image("./media/tatavla_analysis4.png"))
-```
-
-```python jdh={"module": "object", "object": {"source": ["Visualization of movements Tatavla"]}} tags=["figure-tatavla-move-*"]
-from IPython.display import IFrame, display
-
-display(IFrame("./media/kepler_tatavla.html", width="100%", height=700))
+display(Image("./media/kepler_tatavla.png"))
 ```
 
 ### Fener
@@ -1974,7 +1968,7 @@ if "location_2" in movement_cols:
 ```python jdh={"module": "object", "object": {"source": ["Visualization of movements Fener"]}} tags=["figure-fener-bis-*"]
 from IPython.display import Image, display
 
-display(Image("./media/fener_analysis4.png"))
+display(Image("./media/kepler_fener.png"))
 ```
 Reflecting on the results, the contrasting mobility patterns observed in Tatavla and Fener can be better understood when the different historical and socioeconomic profiles of the two neighborhoods are considered. Tatavla developed as a predominantly Greek Orthodox district with strong connections to working-class and migrant populations. Historical accounts trace part of its early Greek population to sailors and other maritime workers who had been brought to work in the Kasımpaşa shipyards and who later settled in Tatavla after gaining their freedom. The neighborhood also received migrants from places such as Chios and the Peloponnese, including both workers and merchants <cite id="man4"><a href="#akaki2023">(Akaki 2023)</a></cite>. More broadly, research on the Greek Orthodox population of nineteenth-century Istanbul shows that a substantial share of the community consisted of migrants and their descendants from rural areas outside the capital <cite id="man5"><a href="#anastassiadou2009">(Anastassiadou 2009)</a></cite>.
 
