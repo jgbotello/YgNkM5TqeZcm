@@ -205,7 +205,7 @@ Once we completed the workflow, the resulting structured data enabled us to perf
 
 ```python jdh={"module": "object", "object": {"source": ["Workflow for data extraction, geolocation, and validation of historical migration records from defters. The process involves two main stages: (1) Data Formatting, Extraction, Geolocation, and Date Conversion using prompt-based LLM processing, and (2) validation through human input and quantitative evaluation metrics (accuracy, recall, and F1 score)"]}} tags=["figure-uml-*"]
 from IPython.display import Image, display
-display(Image("./media/Methodology.png"))
+display(Image("./media/Method.png"))
 ```
 
 ### Dataset
